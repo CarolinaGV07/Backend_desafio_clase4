@@ -1,26 +1,27 @@
 import express from 'express'
-import ProductManager from 'ProductManager.js'
+import ProductManager from './ProductManager.js'
 
 const app = express()
 
-const product = new ProductManager(database.json)
+const product = new ProductManager('database.json')
 
 app.get('/products', async (req,res)=>{
     
     const limit = parseInt (req.query.limit)
 
+    const products = await product.getProducts()
+
     if(limit){
-        const products = await product.getProducts()
         const limitProds = products.slice(0,limit)
 
-        return limitProds
+        res.send(limitProds) 
     } else{
-        res.send(getProducts())
+        res.send(products)
     }
 
     })
 
-app.get('products/:pid', async (req,res)=>{
+app.get('/products/:pid', async (req,res)=>{
 
     const products = await product.getProducts()
     
@@ -32,4 +33,6 @@ app.get('products/:pid', async (req,res)=>{
     else res.send(productFound)
 })
 
-app.listen(8080)
+app.listen(8080, ()=>{
+    console.log('The server is running, oh yeah!!')
+})

@@ -49,7 +49,7 @@ export default class ProductManager {
         
     getProductById = async (productId) => {
 
-        const dateId = await this.getProducts()
+        const dateId = await this.getProduct()
         const findProduct = dateId.find((prod) => prod.id === productId);
         if(findProduct){
             return findProduct
@@ -96,28 +96,3 @@ export default class ProductManager {
         //return o console.log "Registro eliminado correctamente" , esto seria muy buena practica y muy importante 
     }
 }
-
-
-    async function run () {
-        const manager = new ProductManager('database.json')
-        console.log(await manager.getProducts())
-        await manager.addProduct("Producto prueba1", "Este es un producto de prueba1", 200, "Sin imagen1", 25 , "ABC123")
-        await manager.addProduct("Producto prueba2", "Este es un producto de prueba2", 250, "Sin imagen2", 26 , "DEF234")
-        await manager.addProduct("Producto prueba3", "Este es un producto de prueba3", 300, "Sin imagen3", 27 , "GHI345")
-        await manager.addProduct("Producto prueba4", "Este es un producto de prueba4", 350, "Sin imagen4", 28 , "JKL456")
-        await manager.addProduct("Producto prueba5", "Este es un producto de prueba5", 360, "Sin imagen5", 29 , "MNO789")
-        await manager.addProduct("Producto prueba6", "Este es un producto de prueba6", 370, "Sin imagen6", 30 , "PQR582")
-        await manager.addProduct("Producto prueba7", "Este es un producto de prueba7", 380, "Sin imagen7", 31 , "STU603")
-        await manager.addProduct("Producto prueba8", "Este es un producto de prueba8", 390, "Sin imagen8", 32 , "VWX816")
-        await manager.addProduct("Producto prueba9", "Este es un producto de prueba9", 400, "Sin imagen9", 33 , "YZA967")
-        console.log(await manager.getProducts())
-        console.log(await manager.getProductById(2))
-        console.log(await manager.getProductById(5))
-        console.log(await manager.updateProduct(2,{title:"Producto ya probado"}))
-        console.log(await manager.getProducts())
-        console.log(await manager.deleteProduct(4))
-        console.log(await manager.getProducts())
-
-    }
-
-    run()
