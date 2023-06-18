@@ -49,7 +49,7 @@ export default class ProductManager {
         
     getProductById = async (productId) => {
 
-        const dateId = await this.getProduct()
+        const dateId = await this.getProducts()
         const findProduct = dateId.find((prod) => prod.id === productId);
         if(findProduct){
             return findProduct

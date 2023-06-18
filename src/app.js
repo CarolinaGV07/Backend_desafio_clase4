@@ -23,14 +23,13 @@ app.get('/products', async (req,res)=>{
 
 app.get('/products/:pid', async (req,res)=>{
 
-    const products = await product.getProducts()
+    const id = parseInt(req.params.pid)
+
+    const productFounded = await product.getProductById(id)
     
-    const id = parseInt(req.params.id)
-
-    const productFound = products.find(prod => prod.id === id)
-
-    if (!productFound) res.send({ error: 'Product not found' })
-    else res.send(productFound)
+    
+    if (!productFounded) res.send({ error: 'Product not found' })
+    else res.send(productFounded)
 })
 
 app.listen(8080, ()=>{
